@@ -1,4 +1,4 @@
-package br.com.yourhome.register.configuration;
+package br.com.yourhome.register.configuracao;
 
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
