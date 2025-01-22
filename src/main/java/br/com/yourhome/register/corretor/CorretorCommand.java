@@ -1,5 +1,6 @@
 package br.com.yourhome.register.corretor;
 
+import br.com.yourhome.register.configuracao.MessageSourceHelper;
 import br.com.yourhome.register.configuracao.exception.ConflictException;
 import br.com.yourhome.register.configuracao.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
@@ -15,9 +16,11 @@ public class CorretorCommand {
 
     private final CorretorRepository corretorRepository;
 
+    private final MessageSourceHelper messageSourceHelper;
+
     public Corretor salvar(Corretor corretor) {
         corretorRepository.findById(corretor.getDocumento()).ifPresent(existente -> {
-            throw new ConflictException("bla");
+            throw new ConflictException(messageSourceHelper.getMessage("corretor.conflito", corretor.getDocumento()));
         });
         return corretorRepository.save(corretor);
     }
@@ -29,7 +32,7 @@ public class CorretorCommand {
     }
 
     private Corretor findOne(String documento) {
-        return corretorRepository.findById(documento).orElseThrow(() -> new ResourceNotFoundException("não existe"));
+        return corretorRepository.findById(documento).orElseThrow(() -> new ResourceNotFoundException(messageSourceHelper.getMessage("corretor.nao.encontrado", documento)));
     }
 
 }
