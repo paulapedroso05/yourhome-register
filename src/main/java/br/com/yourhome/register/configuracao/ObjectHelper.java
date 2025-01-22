@@ -39,7 +39,7 @@ public class ObjectHelper implements ApplicationContextAware {
 
 	public static void copyNonNullProperties(Object source, Object target, String... ignoreProperties) {
 		String[] nullPropertyNames = getNullPropertyNames(source);
-		copyAllProperties(source, target, (String[]) ArrayUtils.addAll(nullPropertyNames, ignoreProperties));
+		copyAllProperties(source, target, ArrayUtils.addAll(nullPropertyNames, ignoreProperties));
 	}
 
 	public static void copyNonNullProperties(Object source, Object target) {
