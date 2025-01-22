@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `Cliente`;
+
+CREATE TABLE `Cliente` (
+    `documento` VARCHAR(255) NOT NULL,
+    `nome` VARCHAR(255) DEFAULT NULL,
+    `email` VARCHAR(255) DEFAULT NULL,
+    `telefone` VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY (`documento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
