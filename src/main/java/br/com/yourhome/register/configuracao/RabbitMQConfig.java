@@ -1,8 +1,5 @@
 package br.com.yourhome.register.configuracao;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -13,23 +10,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String QUEUE_NAME = "queuecorretor";
-
-    public static final String EXCHANGE_NAME = "corretor";
+    public static final String EXCHANGE_CORRETOR = "corretor";
 
     @Bean
-    public Queue queue() {
-        return new Queue(QUEUE_NAME, false);
-    }
-
-    @Bean
-    public TopicExchange exchange() {
-        return new TopicExchange(EXCHANGE_NAME);
-    }
-
-    @Bean
-    public Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("routing.key.#");
+    public TopicExchange exchangeCorretor() {
+        return new TopicExchange(EXCHANGE_CORRETOR);
     }
 
     @Bean

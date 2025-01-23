@@ -12,6 +12,6 @@ public class CorretorProducer {
     private RabbitTemplate rabbitTemplate;
 
     public void output(CorretorCadastradoMessage message) {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "routing.key", message);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_CORRETOR, "routing.key", message);
     }
 }
