@@ -1,10 +1,11 @@
 package br.com.yourhome.register.corretor;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import br.com.yourhome.register.usuario.Usuario;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,16 +16,36 @@ import java.io.Serializable;
 public class Corretor implements Serializable {
 
     @Id
-    private String documento;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idCorretor;
 
-    private String nome;
-
-    private String email;
-
+    @Column(nullable = false)
     private String telefone;
 
+    private String bio;
+
+    @Column(nullable = false)
     private String creci;
 
-    private String bio;
+    @With
+    @OneToOne
+    @JoinColumn(name = "usuarioFk", nullable = false, unique = true)
+    private Usuario usuario;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "corretorFk", referencedColumnName = "idCorretor")
+    private List<CorretorTipoImovel> tiposImoveis;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "corretorFk", referencedColumnName = "idCorretor")
+    private List<CorretorConstrutora> construtoras;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "corretorFk", referencedColumnName = "idCorretor")
+    private List<CorretorCidadeBairro> cidadesBairros;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "corretorFk", referencedColumnName = "idCorretor")
+    private List<CorretorCidade> cidades;
 
 }
