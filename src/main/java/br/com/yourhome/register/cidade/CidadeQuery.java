@@ -17,4 +17,8 @@ public class CidadeQuery {
         return cidadeRepository.findAll(pageable);
     }
 
+    public Cidade findOne(String codigoIbge) {
+        return cidadeRepository.findCidadeByCodigoIbge(codigoIbge);
+    }
+
 }

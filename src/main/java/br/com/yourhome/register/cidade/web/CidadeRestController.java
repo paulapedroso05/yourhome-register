@@ -8,11 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -27,6 +25,12 @@ public class CidadeRestController {
             @PageableDefault @SortDefault.SortDefaults({
                     @SortDefault(sort = "nome", direction = Sort.Direction.ASC) }) Pageable pageable) {
         return cidadeQuery.findAll(pageable);
+    }
+
+    @GetMapping("/{codigoIbge}")
+    @ResponseStatus(HttpStatus.OK)
+    EntityModel<Cidade> buscar(@PathVariable String codigoIbge){
+        return EntityModel.of(cidadeQuery.findOne(codigoIbge));
     }
 
 }
