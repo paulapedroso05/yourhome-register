@@ -1,6 +1,7 @@
 spring:
   application:
     name: register
+
   jpa:
     hibernate:
       ddl-auto: none
@@ -11,7 +12,7 @@ spring:
         show_sql: false
         format_sql: true
   datasource:
-    url: jdbc:mysql://host.docker.internal:3306/register_yourhome
+    url: jdbc:mysql://localhost:3306/register_yourhome
     username: root
     password: rootadmin
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -20,10 +21,10 @@ spring:
     baseline-on-migrate: true
 
   rabbitmq:
-    host: rabbitmq
+    host: localhost
     port: 5672
     username: guest
     password: guest
-  config:
-    activate:
-      on-profile: "prod"
+logging:
+  level:
+    root: trace
